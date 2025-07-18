@@ -36,7 +36,7 @@ export default async function ServiceDetailPage({ params }) {
       service_price: 1000,
     },
   ];
-  const id = await params.id;
+  const { id } = await params;
   const singleData = data.find((d) => d._id == id);
   if (singleData) {
     return (
