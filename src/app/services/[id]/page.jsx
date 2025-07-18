@@ -1,4 +1,4 @@
-export default function ServiceDetailPage({ params }) {
+export default async function ServiceDetailPage({ params }) {
   const data = [
     {
       _id: "1",
@@ -36,14 +36,21 @@ export default function ServiceDetailPage({ params }) {
       service_price: 1000,
     },
   ];
-  const id = params.id;
+  const id = await params.id;
   const singleData = data.find((d) => d._id == id);
-  console.log(singleData);
-  return (
-    <div>
-      <h1>ID: {singleData._id}</h1>
-      <p>{singleData.service_description}</p>
-      <p>{singleData.service_price}</p>
-    </div>
-  );
+  if (singleData) {
+    return (
+      <div>
+        <h1>ID: {singleData._id}</h1>
+        <p>{singleData.service_description}</p>
+        <p>{singleData.service_price}</p>
+      </div>
+    );
+  } else {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <h1 className="text-3xl font-bold">Service Not Found</h1>
+      </div>
+    );
+  }
 }
